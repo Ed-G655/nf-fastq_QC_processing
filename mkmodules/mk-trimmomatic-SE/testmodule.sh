@@ -8,7 +8,9 @@ export TRIM_LEADING=0
 export TRIM_TRAILING=0
 export TRIM_SLIDE_SIZE=6
 export TRIM_SLIDE_QUAL=30
+export TRIM_HEADCROP=20
 export TRIM_MINLEN=38
+export TRIM_CROP=50
 ###
 
 echo "[>..] test running this module with data in test/data"
