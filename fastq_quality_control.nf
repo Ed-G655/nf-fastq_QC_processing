@@ -204,6 +204,8 @@ pipelinesummary['trimmomatic: trailing']			= params.trim_trailing
 pipelinesummary['trimmomatic: slide size']			= params.trim_slide_size
 pipelinesummary['trimmomatic: slide qual']			= params.trim_slide_qual
 pipelinesummary['trimmomatic: minlen']			= params.trim_minlen
+pipelinesummary['trimmomatic: headcrop']			= params.trim_headcrop
+pipelinesummary['trimmomatic: crop']			= params.trim_crop
 pipelinesummary['input directory']			= params.input_dir
 pipelinesummary['Results Dir']		= results_dir
 pipelinesummary['Intermediate Dir']		= intermediates_dir
@@ -283,9 +285,10 @@ process _001_trimmomatic {
 	file mk_files from mkfiles_001
 
 	output:
-	file "*.fastq.gz" into results_001_trimmomatic_trimmed_fq
+	file "*.fastq.gz" into results_001_trimmomatic_trimmed_fq, results_trimmed_fq
   file "*.trimlog.txt" into results_001_trimmomatic_trimlog
 	file "*.trimreport.txt" into results_001_trimmomatic_trimreport
+	file "*.trimreport.txt" into results_002_trimmomatic_multiqc
 
 	"""
   export TRIM_AVGQUAL="${params.trim_avgqual}"
@@ -293,7 +296,9 @@ process _001_trimmomatic {
   export TRIM_TRAILING="${params.trim_trailing}"
   export TRIM_SLIDE_SIZE="${params.trim_slide_size}"
   export TRIM_SLIDE_QUAL="${params.trim_slide_qual}"
+	export TRIM_HEADCROP="${params.trim_headcrop}"
   export TRIM_MINLEN="${params.trim_minlen}"
+	export TRIM_CROP="${params.trim_crop}"
 	bash runmk.sh
 	"""
 
@@ -356,7 +361,7 @@ if (params.pe){    // this last process is only required for PE data
 		file mk_files from mkfiles_pos1
 
 		output:
-		file "*"
+		file "*" into results_pos1_gather_sample
 
 		"""
 		bash runmk.sh
@@ -365,6 +370,30 @@ if (params.pe){    // this last process is only required for PE data
 	}
 }
 /* prepare for ENDing pipeline */
+
+/* Post Trimming FASTQC */
+
+Channel
+	.fromPath("${workflow.projectDir}/mkmodules/mk-fastqc/*")
+	.toList()
+	.set{ mkfiles_pos2 }
+
+	process _pos2_fastqc_trimmed_seq {
+
+		publishDir "${results_dir}/_pos2_fastqc/",mode:"copy"
+
+		input:
+		file fq from results_trimmed_fq
+		file mk_files from mkfiles_pos2
+
+		output:
+		file "*" into results_pos2_fastqc_trimmed_seq
+
+		"""
+		bash runmk.sh
+		"""
+
+	}
 
 /* _register_configs
  to know which parameters where used for each results dir */
@@ -385,6 +414,44 @@ process _register_configs {
 
 	"""
 	cat ${config} > ${config}_used.txt
+	"""
+
+}
+
+
+
+process  multiqc_fastqc_before {
+
+	publishDir "${results_dir}/multiqc_report/",mode:"copy"
+
+	input:
+  file fastq_results from results_pre1_fastqc_before.collect().ifEmpty([])
+
+
+	output:
+	file "*"
+
+	"""
+	multiqc . --filename  "multiqc_fastqc_before.html"
+	"""
+
+}
+
+
+process multiqc_report {
+
+	publishDir "${results_dir}/multiqc_report/",mode:"copy"
+
+	input:
+	file trim_reports from results_002_trimmomatic_multiqc.collect().ifEmpty([])
+	file fastq_results from results_pos2_fastqc_trimmed_seq.collect().ifEmpty([])
+
+	output:
+	file "multiqc_report.html" into multiqc_report
+  file "multiqc_data"
+
+	"""
+	multiqc .
 	"""
 
 }
