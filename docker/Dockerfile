@@ -5,7 +5,7 @@ FROM rocker/tidyverse
 LABEL base_image="rocker/tidyverse"
 LABEL version="0"
 LABEL software="nf-fastq_QC_processing"
-LABEL software.version="3.2"
+LABEL software.version="0.0.2"
 LABEL about.summary="Nextflow pipeline to analyze and modify fastq sequence quality"
 LABEL about.home="https://github.com/Iaguilaror/nf-fastq_QC_processing.git"
 LABEL about.documentation="https://github.com/Iaguilaror/nf-fastq_QC_processing.git"
@@ -36,7 +36,7 @@ RUN apt-get install -y --no-install-recommends \
 RUN pip install multiqc
 
 # install LATEX dependecies
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get install -y --no-install-recommends \
   texlive-latex-base \
   texlive-fonts-recommended \
   texlive-fonts-extra \
