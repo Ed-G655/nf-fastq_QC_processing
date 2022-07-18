@@ -36,7 +36,7 @@ RUN apt-get install -y --no-install-recommends \
 RUN pip install multiqc
 
 # install LATEX dependecies
-RUN apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends \
   texlive-latex-base \
   texlive-fonts-recommended \
   texlive-fonts-extra \
