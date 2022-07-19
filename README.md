@@ -6,7 +6,7 @@ Nextflow pipeline to analyze and modify fastq sequence quality
 
 ### Workflow overview
 
-![](docs/workflow.png)
+![](workflow.png)
 
 ------------------------------------------------------------------------
 
@@ -55,17 +55,27 @@ Compatible OS\*:
 
 #### R packages requirement
 
-| R package  | Function                                          |
-|------------|---------------------------------------------------|
-| rmarkdown  | render                                            |
-| dplyr      | magrittr, filter(), mutate(), select(), arrange() |
-| knitr      | kable                                             |
-| kableExtra | kable_styling                                     |
-| tidyr      | pivot_longer()                                    |
-| scales     | colour pallettes                                  |
-| ggplot2    | geom_col( ), ggplot()                             |
-| vroom      | vroom ()                                          |
-| cowplot    | theme_cowplot()                                   |
++-------------------+---------------------------------------------------+
+| R package         | Function                                          |
++===================+===================================================+
+| rmarkdown         | render                                            |
++-------------------+---------------------------------------------------+
+| dplyr             | magrittr, filter(), mutate(), select(), arrange() |
++-------------------+---------------------------------------------------+
+| knitr             | kable                                             |
++-------------------+---------------------------------------------------+
+| kableExtra        | kable_styling                                     |
++-------------------+---------------------------------------------------+
+| tidyr             | pivot_longer()                                    |
++-------------------+---------------------------------------------------+
+| scales            | colour pallettes                                  |
++-------------------+---------------------------------------------------+
+| ggplot2           | geom_col( ), ggplot()                             |
++-------------------+---------------------------------------------------+
+| vroom             | vroom ()                                          |
++-------------------+---------------------------------------------------+
+| cowplot           | theme_cowplot()                                   |
++-------------------+---------------------------------------------------+
 
 ### Installation with Docker
 
