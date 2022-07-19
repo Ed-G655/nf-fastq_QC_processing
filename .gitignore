@@ -23,8 +23,6 @@ test/results*
 *.Rdata
 *.Rhistory
 
-## ignore real data dirs
-real-data
 
 ## ignore vestigial files
 */*/all_samples_trim_report.log
