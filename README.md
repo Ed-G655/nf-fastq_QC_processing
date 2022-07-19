@@ -31,29 +31,20 @@ Compatible OS\*:
 
 ### Software
 
-+-------------+----------------------------+---------------------------------------------------------------------------+
-| Requierment | Version                    | Required Commands \*                                                      |
-+=============+============================+===========================================================================+
+| Requirement | Version                    | Required Commands \*                                                      |
+|-------------|----------------------------|---------------------------------------------------------------------------|
 | Java        | v11.0.11                   | java                                                                      |
-+-------------+----------------------------+---------------------------------------------------------------------------+
 | Nextflow    | 21.10.5                    | nextflow run                                                              |
-+-------------+----------------------------+---------------------------------------------------------------------------+
 | Trimmomatic | v0.39                      | java -jar ILLUMINACLIP, AVGQUAL, LEADING, TRAILING, SLIDINGWINDOW, MINLEN |
-+-------------+----------------------------+---------------------------------------------------------------------------+
 | Fastqc      | v0.11.9                    | fastqc                                                                    |
-+-------------+----------------------------+---------------------------------------------------------------------------+
 | Plan9port   | Latest (as of 10/01/2019 ) | mk \*\*                                                                   |
-+-------------+----------------------------+---------------------------------------------------------------------------+
 | R           | v 4.1.2                    | Rscript                                                                   |
-+-------------+----------------------------+---------------------------------------------------------------------------+
 | pandoc      | 2.5                        | pandoc                                                                    |
-+-------------+----------------------------+---------------------------------------------------------------------------+
 | pdfLatex    | \-                         | compiling LaTeX into PDF                                                  |
-+-------------+----------------------------+---------------------------------------------------------------------------+
 
 -   These commands must be accessible from your \$PATH (i.e. you should be able to invoke them from your command line). \*\* Plan9 port builds many binaries, but you ONLY need the mk utility to be accessible from your command line.
 
-#### R packages requierments
+#### R packages requirement
 
 | R package  | Function                                          |
 |------------|---------------------------------------------------|
@@ -74,6 +65,14 @@ Pull a docker container with all requeriments to run fastq_QC_processing:
     docker pull  'edugarcia156/fastq_qc_processing:0.0.2'
 
 *\*You should be able to run docker without sudo*
+
+### Software
+
+| Requirement | Version     | Required Commands \* |
+|-------------|-------------|----------------------|
+| Docker      | =\>20.10.17 | docker pull\*        |
+
+: \*These commands must be accessible from your \$PATH
 
 ### Installation
 
