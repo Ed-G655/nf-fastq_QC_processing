@@ -6,7 +6,7 @@ Nextflow pipeline to analyze and modify fastq sequence quality
 
 ### Workflow overview
 
-![General Workflow](dev_notes/workflow.png)
+![General Workflow](./dev_notes/workflow.png)
 
 ------------------------------------------------------------------------
 
