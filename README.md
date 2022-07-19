@@ -87,11 +87,11 @@ Pull a docker container with all requeriments to run fastq_QC_processing:
 
 ### Software
 
-+----------------+-------------+-------------------------+
-| Requirement    | Version     | Required Commands \*    |
-+================+=============+=========================+
-| Docker         | =\>20.10.17 | docker pull\*           |
-+----------------+-------------+-------------------------+
++--------------------+----------------+-------------------------------+
+| Requirement        | Version        | Required Commands \*          |
++====================+================+===============================+
+| Docker             | =\>20.10.17    | docker pull\*                 |
++--------------------+----------------+-------------------------------+
 
 \*These commands must be accessible from your \$PATH
 
